@@ -1,0 +1,17 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://www.helpingmehear.com/wp-content/uploads/2018/01/theater.jpg);">
+  <div class="container">
+    <h1>Create your ownn movies lists!</h1>
+    <p>Classify movies into any category that inspire you </p>
+  </div>
+</div>
+
+
+<div class="cards container">
+  <% @lists.each do |list| %>
+    <%= link_to list_path(list), class: "card-link" do %>
+      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= list.movies.first.nil? ? "https://www.lambesc.fr/fileadmin/user_upload/cinema.jpg" : list.movies.first.poster_url %>')">
+         <%= list.name %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

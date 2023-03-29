@@ -1,0 +1,9 @@
+<div class="row justify-content-center">
+  <div id="form-list" class="col-4">
+    <%= simple_form_for @list do |f| %>
+      <%= f.input :name, placeholder: 'Please enter a name for your list', label: "List name" %>
+      <%= f.submit class: 'form-btn' %>
+    <% end %>
+  </div>
+  <p><%= link_to "Back to my lists", lists_path %></p>
+</div>

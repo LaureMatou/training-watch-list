@@ -1,0 +1,32 @@
+<div class="container row">
+  <h1><%= @list.name %></h1>
+  <% if @list.movies.first.nil?  %>
+    <div class="col-9">
+      <p><%= "There aren't any movies for this list yet... Don't forget to add them!" %></p>
+    </div>
+  <% else %>
+    <div class="cards col-9">
+      <% @list.movies.each do |movie| %>
+        <div class="card-trip">
+          <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+          <%= image_tag movie.poster_url, class: "card-trip-img" %>
+          <div class="card-trip-infos">
+            <div>
+              <h2> <%= movie.title %></h2>
+              <p> <%= movie.overview %></p>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span><p><i class="fa-solid fa-comment"></i><em><%= bookmark.comment %></em></p></span>
+              <p><%= link_to "Delete", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure to remove this movie from your list?"}, class: "delete-link" %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="col-3">
+    <h4>Add a movie in this list</h4>
+    <%= render "new_bookmark", list: @list, bookmark: @bookmark %>
+  </div>
+</div>
